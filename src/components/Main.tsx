@@ -48,15 +48,14 @@ const Main = () => {
 
   return (
     <>
-      <div className='text-3xl md:text-2xl text-white font-bold flex flex-col items-center my-3'>
-        <label className='text-black bg-green-500 rounded-md cursor-pointer text-6xl md:text-5xl text-white font-bold'>
-          <div className='flex justify-between items-center gap-3 mx-2'>{'Upload a photo!'}</div>
-          <input type='file' onChange={handleImageUpload} className='hidden' />
+      <div className="flex flex-col items-center">
+        <label className="flex flex-col items-center text-darkBlue bg-terraCotta rounded-md cursor-pointer text-6xl md:text-5xl pt-2 pb-4 px-4 font-bold hover:bg-terraCottaDark">
+          <div className="flex justify-between items-center gap-3 mx-2">{'Upload a photo!'}</div>
+          <input type="file" onChange={handleImageUpload} className="hidden" />
         </label>
-
-        {image && <Image image={image} />}
-        {item !== null && <Predictions predictionsArray={[...predictionsArray]} />}
       </div>
+      {item !== null && <Predictions predictionsArray={[...predictionsArray]} />}
+      {image && <Image image={image} />}
     </>
   )
 }
