@@ -1,14 +1,20 @@
 /* eslint-disable react/no-unescaped-entities */
 const Hero = () => {
   return (
-    <div className='max-w-3xl'>
-      <h1 className='mb-6 text-center text-5xl font-light tracking-tight text-white sm:text-5xl lg:text-7xl'>
-        What the <span className='my-1 inline-block font-serif font-bold text-white'>Duck</span>
-      </h1>
-      <p className='text-center text-base text-gray-100'>
-        Have doubts that your duck is a duck? Upload a picture and we'll tell you what it is.
-      </p>
-    </div>
+    <section className="mx-auto py-16">
+      <div className="mx-auto flex w-full flex-col items-center justify-center sm:max-w-screen-sm md:max-w-screen-md lg:flex-row">
+        <div className="text-center">
+          <div className="">
+            <h2 className="bg-clip-text text-3xl font-extrabold text-indigo-500 sm:text-5xl">
+              Is this a duck?
+            </h2>
+            <p className="bg-gradient-to-r from-pink-500 to-indigo-500 bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl">
+              Upload an image and find out!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
   )
 }
 

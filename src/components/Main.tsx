@@ -1,14 +1,18 @@
+/* eslint-disable react/no-unescaped-entities */
 import { browser, div } from '@tensorflow/tfjs'
 import { load, MobileNet } from '@tensorflow-models/mobilenet'
-import React, { useEffect, useState } from 'react'
+import React, { ReactElement, useEffect, useState } from 'react'
 import getImageData from '../helpers/getImageData'
 import { AiFillCamera } from 'react-icons/ai'
 import Image from './Image'
+import Predictions from './Predictions'
+
+type PredictionType = { className: string; probability: number }[]
 
 const Main = () => {
   const [image, setImage] = useState<string | null>('')
   const [item, setItem] = useState<string | null>(null)
-  const [predictionsArray, setPredictionsArray] = useState<string[]>([])
+  const [predictionsArray, setPredictionsArray] = useState<PredictionType>([])
   const [mobilenetModel, setMobilenetModel] = useState<MobileNet | null>(null)
 
   useEffect(() => {
@@ -35,10 +39,9 @@ const Main = () => {
     const predictions = await mobilenetModel.classify(tensor)
     console.log('predictions', predictions)
 
-    const possibleItems = predictions.map(({ className }) => className)
-    setPredictionsArray(possibleItems)
+    setPredictionsArray(predictions)
 
-    const wtfIsThis = possibleItems[0]
+    const wtfIsThis = predictions[0].className
 
     setItem(wtfIsThis)
   }
@@ -51,8 +54,8 @@ const Main = () => {
           <input type='file' onChange={handleImageUpload} className='hidden' />
         </label>
 
-        {item !== null && <div>Ahhhh yes, this looks like a {item}</div>}
         {image && <Image image={image} />}
+        {item !== null && <Predictions predictionsArray={[...predictionsArray]} />}
       </div>
     </>
   )
