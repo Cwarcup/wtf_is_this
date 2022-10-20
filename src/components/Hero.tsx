@@ -5,7 +5,7 @@ const Hero = () => {
       <div className="mx-auto flex w-full flex-col items-center justify-center sm:max-w-screen-sm lg:flex-row">
         <div className="text-center">
           <h2 className="bg-clip-text text-3xl font-extrabold text-darkBlue sm:text-5xl">
-            Is this a duck?
+            Is this a banana?
           </h2>
           <p className="bg-gradient-to-r from-darkBlue via-greenSheen to-darkBlue bg-clip-text text-4xl font-extrabold text-transparent sm:text-6xl">
             Upload an image and find out!
