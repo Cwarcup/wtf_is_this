@@ -71,7 +71,7 @@ const Main = () => {
           <input type="file" onChange={handleUpload} className="hidden" />
         </label>
       </div>
-      {item !== null && bananaFound === true && (
+      {item !== null && (
         <div className="flex flex-col items-center justify-center bg-deepChampagne font-bodyFont sm:mx-20 my-4 py-6 rounded-md">
           <Predictions predictionsArray={[...predictionsArray]} bananaFound={bananaFound} />
 
