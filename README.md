@@ -13,9 +13,8 @@ Feel free to test it out with these images: [Banana](https://images.unsplash.com
 ## Demo
 
 <div align="center">
-<img src='https://media1.giphy.com/media/HT0QqV8qw5lhHiLfwr/giphy.gif?cid=790b7611defba46b8c8d5e41b0dcadf9b9fc281db41eda40&rid=giphy.gif&ct=g' alt="banana is found demo" />
-<img src='https://media2.giphy.com/media/yos6l1Uk0MDnDsC3qP/giphy.gif?
-cid=790b76115895ea2206c60bf44daa0d37c743b768176f0f5a&rid=giphy.gif&ct=g' alt="no banana demo" />
+<img src='https://media4.giphy.com/media/HT0QqV8qw5lhHiLfwr/giphy.webp' alt="banana is found demo" />
+<img src='https://media2.giphy.com/media/yos6l1Uk0MDnDsC3qP/giphy.webp' alt="no banana demo" />
 </div>
 
 ## Built With
