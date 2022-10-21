@@ -1,13 +1,11 @@
 /* eslint-disable react/no-unescaped-entities */
-import { browser, div } from '@tensorflow/tfjs'
+import { browser } from '@tensorflow/tfjs'
 import { load, MobileNet } from '@tensorflow-models/mobilenet'
-import React, { ReactElement, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import getImageData from '../helpers/getImageData'
-import { AiFillCamera } from 'react-icons/ai'
 import Image from './Image'
 import Predictions from './Predictions'
-
-type PredictionType = { className: string; probability: number }[]
+import { PredictionType } from '../types/types'
 
 const Main = () => {
   const [image, setImage] = useState<string | null>(null)
@@ -17,13 +15,15 @@ const Main = () => {
   const [mobilenetModel, setMobilenetModel] = useState<MobileNet | null>(null)
 
   useEffect(() => {
-    ;(async () => {
-      setMobilenetModel(await load())
-    })()
+    // load the mobilenet model
+    load().then((model) => {
+      setMobilenetModel(model)
+    })
   }, [])
 
-  // ran in to upload button
-  const handleImageUpload = async ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
+  // function to handle the image upload
+  const handleUpload = async ({ target: { files } }: React.ChangeEvent<HTMLInputElement>) => {
+    // if there is no file, return
     if (!mobilenetModel || !files || !files.length) {
       return
     }
@@ -33,19 +33,21 @@ const Main = () => {
     setImage(imageUrl) // set the image url
 
     // get the image data
-    const { imageElement } = await getImageData(imageUrl)
-    const tensor: any = browser.fromPixels(imageElement)
+    const imageData = await getImageData(imageUrl)
 
-    // get the predictions
-    const predictions = await mobilenetModel.classify(tensor)
+    // create a tf.Tensor from an image element
+    const image: any = browser.fromPixels(imageData.imageElement)
 
+    // Promise that resolves to an array of classes and probabilities
+    const predictions = await mobilenetModel.classify(image)
+
+    // all the predictions
     setPredictionsArray(predictions)
 
+    // create an array of the class names from the predictions
     const classNamesFromPredictions = predictions.map(({ className }) => className)
 
-    console.log('classNamesFromPredictions', classNamesFromPredictions)
-
-    // use regex to find if any of the predictions contain the word banana
+    // find if any of the predictions contain the word banana
     const bananaRegex = /banana/gi
     const bananaPrediction = classNamesFromPredictions.find((className) =>
       className.match(bananaRegex),
@@ -58,19 +60,16 @@ const Main = () => {
     }
   }
 
-  console.log('item', item)
-  console.log('image', image)
-
   return (
     <>
       <div className="flex flex-col items-center pb-16">
-        <label className="flex flex-col items-center text-darkBlue bg-terraCotta rounded-md cursor-pointer text-4xl md:text-5xl pt-2 pb-4 px-4 font-bold hover:bg-terraCottaDark ">
+        <label className="min-w-max flex flex-col items-center text-darkBlue bg-terraCotta rounded-md cursor-pointer text-4xl md:text-5xl pt-2 pb-4 px-4 font-bold hover:bg-terraCottaDark ">
           <div className="flex justify-between items-center gap-3 mx-2">{'Upload a photo!'}</div>
-          <input type="file" onChange={handleImageUpload} className="hidden" />
+          <input type="file" onChange={handleUpload} className="hidden" />
         </label>
       </div>
       {item !== null && (
-        <div className="flex flex-col items-center justify-center bg-deepChampagne font-bodyFont mx-20 my-4 py-6 rounded-md">
+        <div className="flex flex-col items-center justify-center bg-deepChampagne font-bodyFont sm:mx-20 my-4 py-6 rounded-md">
           <Predictions predictionsArray={[...predictionsArray]} bananaFound={bananaFound} />
 
           {image === null ? null : <Image image={image} />}

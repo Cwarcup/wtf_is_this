@@ -9,7 +9,7 @@ type Props = {
 }
 
 const Predictions = (props: Props) => {
-  // function to convert probability number to percentage
+  // convert probability number to percentage
   const toPercentage = (num: number) => {
     return (num * 100).toFixed()
   }
@@ -29,7 +29,7 @@ const Predictions = (props: Props) => {
     return (
       <div className="text-darkBlue text-center flex flex-col items-center">
         <div className="text-6xl mb-2">🙈</div>
-        <p className="text-xl font-bold">Hmm, it looks like there's no banana.</p>
+        <p className="text-xl font-bold">Hmmm, it looks like there's no banana.</p>
         <p className="text-xl">But I still have the top predictions:</p>
         <ul className="text-xl">{predictionsList}</ul>
       </div>
