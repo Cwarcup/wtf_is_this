@@ -27,7 +27,10 @@ const Main = () => {
     if (!mobilenetModel || !files || !files.length) {
       return
     }
+
     setItem('')
+    setBananaFound(false)
+    setPredictionsArray([])
 
     const imageUrl = URL.createObjectURL(files[0]) // create a url for the image
     setImage(imageUrl) // set the image url
